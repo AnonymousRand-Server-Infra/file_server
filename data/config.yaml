@@ -1,0 +1,4 @@
+allow-delete: true
+allow-search: true
+allow-symlink: true
+allow-upload: true

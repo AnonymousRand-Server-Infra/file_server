@@ -1,0 +1,8 @@
+[Unit]
+Description=periodic git commit of file server
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=<REPLACE: absolute path to file server's directory>
+ExecStart=/usr/bin/env bash git_auto_commit.sh

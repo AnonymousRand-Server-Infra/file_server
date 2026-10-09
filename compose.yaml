@@ -18,16 +18,20 @@ services:
     volumes:
       # the file server's, you know, files
       - type: bind
-        source: ./files/
+        source: ${SERVED_FILES_DIR}
         target: /files/
       # other host-provided data
       - type: bind
         source: ./data/
         target: /data/
     environment:
-      # SYNC: paths
+      # SYNC: paths inside container
       DUFS_SERVE_PATH: /files/
       DUFS_BIND: ${FILE_SERVER_SCKT:?}
+      # since the password hash may contain '$', i think we need `$$` without braces specifically
+      DUFS_AUTH: "admin:$$ADMIN_PASSWORD_HASH@${ADMIN_ONLY_ACCESS:?}|\
+                  @/amongus.webp,/public/,/unlisted/"
+      DUFS_HIDDEN: ${HIDDEN_FILES:?}
       DUFS_CONFIG: /data/config.yaml
     depends_on:
       nginx:

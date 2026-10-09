@@ -1,2 +1,11 @@
+# security
+.env
+# SYNC: naming convention!
+*_privkey
+
 files/*
 !files/.gitkeep
+
+# vim
+*.swp
+*.swo
