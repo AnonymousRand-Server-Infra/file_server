@@ -1,0 +1,38 @@
+include:
+  - ${PATH_TO_ROOT_DOCKER_PROJ:?}/shared_sckts.yaml
+  - ${PATH_TO_ROOT_DOCKER_PROJ:?}/${PATH_FROM_ROOT_TO_NGINX}/compose.yaml
+  - ${PATH_TO_ROOT_DOCKER_PROJ:?}/${PATH_FROM_ROOT_TO_IOCAINE}/compose.yaml
+  - ./deployment/anubis/compose.yaml
+
+services:
+  file_server:
+    container_name: file_server
+    extends:
+      - file: ${PATH_TO_ROOT_DOCKER_PROJ:?}/shared_sckts.yaml
+        service: shared_sckts_user
+    profiles:
+      - ${DOCKER_DEFAULT_PROFILE:?}
+    image: sigoden/dufs:latest
+    restart: unless-stopped
+    user: ${DOCKER_NONROOT_USER:?}
+    volumes:
+      # the file server's, you know, files
+      - type: bind
+        source: ./files/
+        target: /files/
+      # other host-provided data
+      - type: bind
+        source: ./data/
+        target: /data/
+    environment:
+      # SYNC: paths
+      DUFS_SERVE_PATH: /files/
+      DUFS_BIND: ${FILE_SERVER_SCKT:?}
+      DUFS_CONFIG: /data/config.yaml
+    depends_on:
+      nginx:
+        condition: service_healthy
+      iocaine:
+        condition: service_started
+      file_server_anubis:
+        condition: service_healthy
