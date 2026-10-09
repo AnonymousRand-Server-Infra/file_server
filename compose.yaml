@@ -8,8 +8,8 @@ services:
   file_server:
     container_name: file_server
     extends:
-      - file: ${PATH_TO_ROOT_DOCKER_PROJ:?}/shared_sckts.yaml
-        service: shared_sckts_user
+      file: ${PATH_TO_ROOT_DOCKER_PROJ:?}/shared_sckts.yaml
+      service: shared_sckts_user
     profiles:
       - ${DOCKER_DEFAULT_PROFILE:?}
     image: sigoden/dufs:latest
@@ -28,8 +28,7 @@ services:
       # SYNC: paths inside container
       DUFS_SERVE_PATH: /files/
       DUFS_BIND: ${FILE_SERVER_SCKT:?}
-      # since the password hash may contain '$', i think we need `$$` without braces specifically
-      DUFS_AUTH: "admin:$$ADMIN_PASSWORD_HASH@${ADMIN_ONLY_ACCESS:?}|\
+      DUFS_AUTH: "admin:${ADMIN_PASSWORD_HASH:?}@${ADMIN_ONLY_ACCESS:?}|\
                   @/amongus.webp,/public/,/unlisted/"
       DUFS_HIDDEN: ${HIDDEN_FILES:?}
       DUFS_CONFIG: /data/config.yaml

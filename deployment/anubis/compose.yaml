@@ -7,8 +7,8 @@ services:
   file_server_anubis:
     container_name: file_server_anubis
     extends:
-      - file: ${PATH_TO_ROOT_DOCKER_PROJ_LOCAL:?}/${PATH_FROM_ROOT_TO_ANUBIS:?}/compose.yaml
-        service: anubis_base
+      file: ${PATH_TO_ROOT_DOCKER_PROJ_LOCAL:?}/${PATH_FROM_ROOT_TO_ANUBIS:?}/compose.yaml
+      service: anubis_base
     profiles:
       - ${DOCKER_DEFAULT_PROFILE:?}
     volumes:
@@ -20,7 +20,7 @@ services:
     environment:
       BIND_NETWORK: unix
       BIND: ${FILE_SERVER_ANUBIS_IN_SCKT:?}
-      TARGET: utix://${FILE_SERVER_ANUBIS_OUT_SCKT:?}
+      TARGET: unix://${FILE_SERVER_ANUBIS_OUT_SCKT:?}
 
 volumes:
   file_server_anubis_var:
