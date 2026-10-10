@@ -31,7 +31,7 @@ services:
       DUFS_SERVE_PATH: /files/
       DUFS_BIND: ${FILE_SERVER_SCKT:?}
       DUFS_AUTH: "admin:${ADMIN_PASSWORD_HASH:?}@${ADMIN_ONLY_ACCESS:?}|\
-                  @/amongus.webp,/public/,/unlisted/"
+                  @/amogus.webp,/public/,/unlisted/"
       DUFS_HIDDEN: ${HIDDEN_FILES:?}
       DUFS_CONFIG: /data/config.yaml
     # dufs' base image has umask 022, which prevents nginx's group from writing to the socket
