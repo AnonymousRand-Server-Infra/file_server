@@ -56,6 +56,6 @@ status_codes:
 ## metrics
 #metrics:
 #  # SYNC: socket with nginx!! (i don't think there's a way to fill this from an env var >w<)
-#  bind: "/run/sockets/personal_website_anubis_metrics.sock"
+#  bind: "/run/sockets/file_server_anubis_metrics.sock"
 #  network: "unix"
 #  socketMode: "0660"

@@ -12,7 +12,9 @@ services:
       service: shared_sckts_user
     profiles:
       - ${DOCKER_DEFAULT_PROFILE:?}
-    image: sigoden/dufs:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
     restart: unless-stopped
     user: ${DOCKER_NONROOT_USER:?}
     volumes:
@@ -32,6 +34,10 @@ services:
                   @/amongus.webp,/public/,/unlisted/"
       DUFS_HIDDEN: ${HIDDEN_FILES:?}
       DUFS_CONFIG: /data/config.yaml
+    # dufs' base image has umask 022, which prevents nginx's group from writing to the socket
+    # (setting `umask` in dockerfile doesn't work because different shell session?)
+    post_start:
+      - command: chmod 660 ${FILE_SERVER_SCKT:?}
     depends_on:
       nginx:
         condition: service_healthy

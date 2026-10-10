@@ -13,7 +13,7 @@ server {
         # only set these on first proxying "hop"!
         include conf.d/snippets/inbound_edge_forwarding_headers.func;
 
-        set $anubis_in_loc http://unix:${FILE_SERVER_ANUBIS_IN};
+        set $anubis_in_loc http://unix:${FILE_SERVER_ANUBIS_IN_SCKT};
         include conf.d/snippets/anubis.func;
     }
 
@@ -35,7 +35,7 @@ server {
         include conf.d/snippets/general_forwarding_headers.func;
 
         set $iocaine_upstream @root;
-        include snippets/iocaine.func;
+        include conf.d/snippets/iocaine.func;
     }
 
     # finally send traffic that passed iocaine to the upstream
