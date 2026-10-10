@@ -7,8 +7,13 @@ bots:
   - import: /data/cfg/base_bot_policies.yaml
 
   # SYNC: make sure there aren't any actual files being blocked by this!
-  - name: "block-wordpress-enumeration"
-    expression: 'path.startsWith("/wp-") || path.endsWith(".php")'
+  - name: "block-enumeration"
+    expression: >-
+      path.startsWith("/wp-")
+      || path.endsWith(".php")
+      || path.startsWith("/.env")
+      || path.startsWith("/.git")
+      || path.startsWith("/.aws")
     action: CHALLENGE
     challenge:
       # impossible challenge; intentionally waste their compute >:3
