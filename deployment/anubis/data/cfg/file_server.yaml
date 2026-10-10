@@ -13,6 +13,7 @@ bots:
     challenge:
       # impossible challenge; intentionally waste their compute >:3
       difficulty: 16
+      algorithm: fast
 
   - name: "allow-css-js"
     expression: 'path.endsWith(".css") || path.endsWith(".js")'
