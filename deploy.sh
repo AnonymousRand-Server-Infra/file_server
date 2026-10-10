@@ -24,4 +24,9 @@ docker stop iocaine && docker rm -v iocaine
 
 docker system prune --force
 docker compose --profile "$DOCKER_DEFAULT_PROFILE" build --no-cache
-docker compose --profile "$DOCKER_DEFAULT_PROFILE" up
+
+if [[ "$1" == "-d" ]]; then
+    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up -d
+else
+    docker compose --profile "$DOCKER_DEFAULT_PROFILE" up
+fi

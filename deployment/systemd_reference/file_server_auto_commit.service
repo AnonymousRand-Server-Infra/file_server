@@ -3,6 +3,7 @@ Description=periodic git commit of file server
 
 [Service]
 Type=oneshot
+# this user must have git credentials!
 User=<REPLACE: preferably non-root user>
-WorkingDirectory=<REPLACE: absolute path to file server's base directory>
+WorkingDirectory=<REPLACE: absolute path to `backup_scripts/`>
 ExecStart=/usr/bin/env bash git_auto_commit.sh
