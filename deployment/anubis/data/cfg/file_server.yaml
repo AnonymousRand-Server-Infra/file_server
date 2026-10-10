@@ -6,6 +6,14 @@ bots:
   #- import: ./base_bot_policies.yaml
   - import: /data/cfg/base_bot_policies.yaml
 
+  # SYNC: make sure there aren't any actual files being blocked by this!
+  - name: "block-wordpress-enumeration"
+    expression: 'path.startsWith("/wp-") || path.endsWith(".php")'
+    action: CHALLENGE
+    challenge:
+      # impossible challenge; intentionally waste their compute >:3
+      difficulty: 16
+
   - name: "allow-css-js"
     expression: 'path.endsWith(".css") || path.endsWith(".js")'
     action: ALLOW
