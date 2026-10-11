@@ -18,6 +18,9 @@ server {
         include conf.d/snippets/anubis.func;
     }
 
+    # for certbot (bypasses anubis etc. and also ensures it works with nginx in a container)
+    include conf.d/snippets/acme_challs.func;
+
     ssl_certificate /etc/letsencrypt/live/files.anonymousrand.xyz/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/files.anonymousrand.xyz/privkey.pem; # managed by Certbot
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
