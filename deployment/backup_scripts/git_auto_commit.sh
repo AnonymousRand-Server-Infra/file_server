@@ -7,8 +7,8 @@ set -ex
 script_path="$(dirname "$(realpath "${BASH_SOURCE[0]:-$0}")")"
 cd "$script_path"
 
-# SYNC: path to file server's base directory
-cd ../../
+# SYNC: path to file server's SERVED FILES directory
+cd ../../files/
 
 git add -A
 # since we have `set -e`, we need to not commit if nothing was changed, as that exits with error
