@@ -11,7 +11,7 @@ bots:
     expression: >-
       path.startsWith("/wp-")
       || path.endsWith(".php")
-      || path.startsWith("/.env")
+      || path.endsWith(".env")
       || path.startsWith("/.git")
       || path.startsWith("/.aws")
     action: CHALLENGE
