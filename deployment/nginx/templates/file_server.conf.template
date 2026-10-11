@@ -1,5 +1,6 @@
 # route `files.anonymousrand.xyz:443` to my file server
 
+
 # first send requests through anubis
 server {
     listen 443 ssl; # managed by Certbot
