@@ -1,13 +1,13 @@
 include:
   # note that this should also include the files needed for `depends_on` (since that key is
   # inherited with `extends`, but the actual files for the services it lists are not)
-  - ${PATH_TO_ROOT_DOCKER_PROJ_LOCAL:?}/${PATH_FROM_ROOT_TO_ANUBIS:?}/compose.yaml
+  - ${PATH_TO_SERVER_ROOT_LOCAL:?}/${PATH_FROM_ROOT_TO_ANUBIS:?}/compose.yaml
 
 services:
   file_server_anubis:
     container_name: file_server_anubis
     extends:
-      file: ${PATH_TO_ROOT_DOCKER_PROJ_LOCAL:?}/${PATH_FROM_ROOT_TO_ANUBIS:?}/compose.yaml
+      file: ${PATH_TO_SERVER_ROOT_LOCAL:?}/${PATH_FROM_ROOT_TO_ANUBIS:?}/compose.yaml
       service: anubis_base
     profiles:
       - ${DOCKER_DEFAULT_PROFILE:?}
@@ -17,6 +17,9 @@ services:
       - type: volume
         source: file_server_anubis_var
         target: /var/anubis/
+    env_file:
+      # for `envsubst`
+      - ./.env
     environment:
       BIND_NETWORK: unix
       BIND: ${FILE_SERVER_ANUBIS_IN_SCKT:?}

@@ -68,6 +68,6 @@ status_codes:
 
 ## metrics
 #metrics:
-#  bind: ${PERSONAL_WEBSITE_ANUBIS_METRICS_SCKT}
+#  bind: ${FILE_SERVER_ANUBIS_METRICS_SCKT}
 #  network: unix
 #  socketMode: "0660" # must be a string

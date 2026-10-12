@@ -1,14 +1,14 @@
 include:
-  - ${PATH_TO_ROOT_DOCKER_PROJ:?}/${PATH_FROM_ROOT_TO_UTILS:?}/shared_sckts.yaml
-  - ${PATH_TO_ROOT_DOCKER_PROJ:?}/${PATH_FROM_ROOT_TO_NGINX}/compose.yaml
-  - ${PATH_TO_ROOT_DOCKER_PROJ:?}/${PATH_FROM_ROOT_TO_IOCAINE}/compose.yaml
+  - ${PATH_TO_SERVER_ROOT:?}/${PATH_FROM_ROOT_TO_UTILS:?}/shared_sckts.yaml
+  - ${PATH_TO_SERVER_ROOT:?}/${PATH_FROM_ROOT_TO_NGINX}/compose.yaml
+  - ${PATH_TO_SERVER_ROOT:?}/${PATH_FROM_ROOT_TO_IOCAINE}/compose.yaml
   - ./deployment/anubis/compose.yaml
 
 services:
   file_server:
     container_name: file_server
     extends:
-      file: ${PATH_TO_ROOT_DOCKER_PROJ:?}/${PATH_FROM_ROOT_TO_UTILS:?}/shared_sckts.yaml
+      file: ${PATH_TO_SERVER_ROOT:?}/${PATH_FROM_ROOT_TO_UTILS:?}/shared_sckts.yaml
       service: shared_sckts_user
     profiles:
       - ${DOCKER_DEFAULT_PROFILE:?}
