@@ -37,6 +37,7 @@ services:
       DUFS_CONFIG: /data/config.yaml
     # dufs' base image has umask 022, which prevents nginx's group from writing to the socket
     # (setting `umask` in dockerfile doesn't work because different shell session?)
+    # and `post_start` instead of `pre_start` to make sure the socket file already exists
     post_start:
       - command: chmod 660 ${FILE_SERVER_SCKT:?}
     depends_on:
