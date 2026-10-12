@@ -9,18 +9,8 @@ cd "$script_path"
 
 source ./.env
 
-# try this in our current directory first in case the services to restart were started by
-# this project originally
-docker compose --profile "$DOCKER_DEFAULT_PROFILE" down
-
-# otherwise (e.g. if they were started by the root docker project), we do a project-agnostic restart
-# also, unfortunately this restarts the entire proxy stack since we `depend_on` it, and removing
-# the `depend_on`s seem to break things 3:
-# SYNC: containers and depended-on containers!
-docker stop file_server && docker rm -v file_server
-docker stop file_server_anubis && docker rm -v file_server_anubis
-docker stop nginx && docker rm -v nginx
-docker stop iocaine && docker rm -v iocaine
+chmod +x ./stop.sh
+./stop.sh
 
 docker system prune --force
 docker compose --profile "$DOCKER_DEFAULT_PROFILE" build --no-cache
