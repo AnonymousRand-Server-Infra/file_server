@@ -35,6 +35,12 @@ services:
                   @/amogus.webp,/public/,/unlisted/"
       DUFS_HIDDEN: ${HIDDEN_FILES:?}
       DUFS_CONFIG: /data/config.yaml
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "https://${FILE_SERVER_SITE_DOMAIN:?}"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 1m
     # dufs' base image has umask 022, which prevents nginx's group from writing to the socket
     # (setting `umask` in dockerfile doesn't work because different shell session?)
     # and `post_start` instead of `pre_start` to make sure the socket file already exists

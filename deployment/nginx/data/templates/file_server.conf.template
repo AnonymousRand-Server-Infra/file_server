@@ -4,7 +4,7 @@
 # first send requests through anubis
 server {
     listen 443 ssl; # managed by Certbot
-    server_name files.anonymousrand.xyz;
+    server_name ${FILE_SERVER_SITE_DOMAIN};
 
     access_log /var/log/nginx/file_server_access.log;
     error_log /var/log/nginx/file_server_error.log;
@@ -33,7 +33,7 @@ server {
 # then send traffic that passed anubis through iocaine
 server {
     listen unix:${FILE_SERVER_ANUBIS_OUT_SCKT};
-    server_name files.anonymousrand.xyz;
+    server_name ${FILE_SERVER_SITE_DOMAIN};
 
     location / {
         include conf.d/snippets/general_forwarding_headers.func;
@@ -57,7 +57,7 @@ server {
 # redirect http requests to https
 server {
     listen 80;
-    server_name files.anonymousrand.xyz;
+    server_name ${FILE_SERVER_SITE_DOMAIN};
 
     client_max_body_size 1G;
 
