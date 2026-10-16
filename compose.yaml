@@ -14,7 +14,6 @@ services:
       - ${DOCKER_DEFAULT_PROFILE:?}
     build:
       context: ./
-      dockerfile: Dockerfile
     restart: unless-stopped
     # note that this user/group will be the one to own files uploaded from the web ui
     user: ${DOCKER_NONROOT_USER:?}
